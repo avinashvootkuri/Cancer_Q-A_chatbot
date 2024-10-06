@@ -127,7 +127,7 @@ Now run the app on your host machine:
 ```bash
 pipenv shell
 
-cd cancer_chatbot
+cd Cancer_chatbot
 
 export POSTGRES_HOST=localhost
 python app.py
@@ -242,14 +242,14 @@ The code for the application is in the fitness_assistant folder:
 - [`app.py`](Cancer_chatbot/app.py) - the Flask API, the main entrypoint to the application
 - [`rag.py`](Cancer_chatbot/rag.py) - the main RAG logic for building the retrieving the data and building the prompt
 - [`ingest.py`](Cancer_chatbot/ingest.py) - loading the data into the knowledge base
-- [`minsearch.py`] ([text](Cancer_chatbot/minsearch.py))  - an in-memory search engine
-- [`db.py`] ([text](Cancer_chatbot/db.py)) - the logic for logging the requests and responses to postgres
+- [`minsearch.py`](Cancer_chatbot/minsearch.py)  - an in-memory search engine
+- [`db.py`](Cancer_chatbot/db.py) - the logic for logging the requests and responses to postgres
 - [`db_prep.py`](Cancer_chatbot/db_prep.py) - the script for initializing the database
 
 We also have some code in the project root directory:
 
-[`test.py`](test.py) - select a random question for testing
-[`cli.py`](cli.py) - interactive CLI for the APP
+[`test.py`](test.py) - select a random question for testing.
+[`cli.py`](cli.py) - interactive CLI for the APP.
 
 ### Interface
 
@@ -284,12 +284,13 @@ We have the following notebooks:
 
 The basic approach - using `minsearch` without any boosting - gave the following metrics:
 
-Hit rate: 91%
-MRR: 52%
+- Hit rate: 91%
+- MRR: 52%
+
 The improved version (with tuned boosting):
 
-Hit rate: 94%
-MRR: 54%
+- Hit rate: 94%
+- MRR: 54%
 
 The best boosting parameters:
 
@@ -306,14 +307,14 @@ We used the LLM-as-a-Judge metric to evaluate the quality of our RAG flow.
 
 For gpt-4o-mini, in a sample with 600 records, we had:
 
-554 (91%) RELEVANT
-53 (8.9%) PARTLY_RELEVANT
-3 (0.05%) NON_RELEVANT
+- 554 (91%) RELEVANT
+- 53 (8.9%) PARTLY_RELEVANT
+- 3 (0.05%) NON_RELEVANT
 
 We also tested gpt-4o on only 118 records was recieving timeout errors:
 
-107 (90.5%) RELEVANT
-11 (9.5%) PARTLY_RELEVANT
+- 107 (90.5%) RELEVANT
+- 11 (9.5%) PARTLY_RELEVANT
 
 The difference is minimal, so we opted for gpt-4o-mini.
 
