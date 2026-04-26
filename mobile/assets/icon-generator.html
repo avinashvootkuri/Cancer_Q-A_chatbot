@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer QA Icon Generator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #7C3AED;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        canvas {
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        button {
+            background: #7C3AED;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 10px 10px 0;
+        }
+        button:hover {
+            background: #6D28D9;
+        }
+        .preview {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .preview-item {
+            text-align: center;
+        }
+        .preview-item p {
+            margin: 10px 0 0 0;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎗️ Cancer QA Icon Generator</h1>
+        <p>Generate icons for your Cancer QA Chatbot app. Click the buttons below to download each icon.</p>
+        
+        <div class="preview">
+            <div class="preview-item">
+                <canvas id="iconCanvas" width="1024" height="1024"></canvas>
+                <p>App Icon (1024x1024)</p>
+                <button onclick="downloadIcon()">Download icon.png</button>
+            </div>
+            
+            <div class="preview-item">
+                <canvas id="adaptiveCanvas" width="1024" height="1024"></canvas>
+                <p>Adaptive Icon (1024x1024)</p>
+                <button onclick="downloadAdaptive()">Download adaptive-icon.png</button>
+            </div>
+        </div>
+
+        <div class="preview-item">
+            <canvas id="splashCanvas" width="1284" height="2778" style="max-width: 300px; height: auto;"></canvas>
+            <p>Splash Screen (1284x2778)</p>
+            <button onclick="downloadSplash()">Download splash.png</button>
+        </div>
+
+        <div class="preview-item">
+            <canvas id="faviconCanvas" width="48" height="48"></canvas>
+            <p>Favicon (48x48)</p>
+            <button onclick="downloadFavicon()">Download favicon.png</button>
+        </div>
+    </div>
+
+    <script>
+        // Draw main app icon
+        function drawIcon() {
+            const canvas = document.getElementById('iconCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Purple gradient background
+            const gradient = ctx.createLinearGradient(0, 0, 1024, 1024);
+            gradient.addColorStop(0, '#7C3AED');
+            gradient.addColorStop(1, '#9333EA');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 1024, 1024);
+            
+            // White circle in center
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.beginPath();
+            ctx.arc(512, 512, 380, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Ribbon emoji (or text)
+            ctx.font = 'bold 400px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🎗️', 512, 512);
+            
+            // CQA text at bottom
+            ctx.font = 'bold 120px Arial';
+            ctx.fillText('CQA', 512, 820);
+        }
+        
+        // Draw adaptive icon (foreground only)
+        function drawAdaptive() {
+            const canvas = document.getElementById('adaptiveCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Transparent background
+            ctx.clearRect(0, 0, 1024, 1024);
+            
+            // Ribbon emoji
+            ctx.font = 'bold 600px Arial';
+            ctx.fillStyle = '#7C3AED';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🎗️', 512, 512);
+        }
+        
+        // Draw splash screen
+        function drawSplash() {
+            const canvas = document.getElementById('splashCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // White background
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, 1284, 2778);
+            
+            // Center content
+            const centerY = 1389;
+            
+            // Purple circles
+            ctx.fillStyle = '#F3E8FF';
+            ctx.beginPath();
+            ctx.arc(642, centerY, 200, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = '#E9D5FF';
+            ctx.beginPath();
+            ctx.arc(642, centerY, 150, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = '#7C3AED';
+            ctx.beginPath();
+            ctx.arc(642, centerY, 100, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Ribbon emoji
+            ctx.font = 'bold 100px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🎗️', 642, centerY);
+            
+            // App name
+            ctx.font = 'bold 80px Arial';
+            ctx.fillStyle = '#111827';
+            ctx.fillText('Cancer QA', 642, centerY + 200);
+            
+            ctx.font = '40px Arial';
+            ctx.fillStyle = '#6B7280';
+            ctx.fillText('Your Health Assistant', 642, centerY + 270);
+        }
+        
+        // Draw favicon
+        function drawFavicon() {
+            const canvas = document.getElementById('faviconCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Purple background
+            ctx.fillStyle = '#7C3AED';
+            ctx.fillRect(0, 0, 48, 48);
+            
+            // White text
+            ctx.font = 'bold 24px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('CQ', 24, 24);
+        }
+        
+        // Download functions
+        function downloadIcon() {
+            const canvas = document.getElementById('iconCanvas');
+            const link = document.createElement('a');
+            link.download = 'icon.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        function downloadAdaptive() {
+            const canvas = document.getElementById('adaptiveCanvas');
+            const link = document.createElement('a');
+            link.download = 'adaptive-icon.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        function downloadSplash() {
+            const canvas = document.getElementById('splashCanvas');
+            const link = document.createElement('a');
+            link.download = 'splash.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        function downloadFavicon() {
+            const canvas = document.getElementById('faviconCanvas');
+            const link = document.createElement('a');
+            link.download = 'favicon.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        // Draw all icons on page load
+        window.onload = function() {
+            drawIcon();
+            drawAdaptive();
+            drawSplash();
+            drawFavicon();
+        };
+    </script>
+</body>
+</html>

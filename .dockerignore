@@ -1,0 +1,51 @@
+# Git
+.git
+.gitignore
+
+# Mobile app (not needed in backend)
+mobile/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Notebooks (not needed in production)
+notebooks/
+
+# Images/docs
+images/
+*.md
+LICENSE
+
+# Environment files (set via docker-compose or runtime)
+.env
+.envrc_template
+
+# Test files
+test.py
+*_test.py
+tests/
+
+# Evaluation data (not needed for production)
+data/rag-eval-*.csv
+
+# Build artifacts
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,33 @@
+node_modules/
+.expo/
+.expo-shared/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# Local build artifacts (use GitHub Releases / EAS instead of committing binaries)
+builds/
+*.apk
+*.aab
+android/build/
+android/app/build/
+.gradle-local/
+android/.gradle/
+
+# JetBrains / Android Studio (machine-local)
+.idea/
+
+# macOS
+.DS_Store
+
+# Temporary files
+*.swp
+*.swo
+*~
+.tmp/

@@ -1,0 +1,23 @@
+# Core Dependencies
+flask>=3.0.0
+flask-cors>=4.0.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+gunicorn>=21.0.0
+
+# LLM Providers (Cloud APIs - lightweight)
+groq>=0.4.0
+openai>=1.0.0
+
+# Database
+psycopg2-binary>=2.9.9
+
+# Data Processing
+pandas>=2.0.0
+scikit-learn>=1.3.0
+
+# CLI Interface
+questionary>=2.0.0
+
+# Note: torch, transformers, accelerate removed to reduce image size
+# The app uses Groq API (cloud) instead of local models

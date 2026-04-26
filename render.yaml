@@ -1,0 +1,43 @@
+databases:
+  - name: cancer-chatbot-db
+    databaseName: course_assistant
+    user: cancer_user
+    plan: free
+
+services:
+  - type: web
+    name: cancer-qa-backend
+    runtime: docker
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false  # Set manually in dashboard for security
+      - key: GROQ_API_KEY_FALLBACK
+        sync: false  # Optional second key if primary fails (rate limit, auth, etc.)
+      - key: SERPAPI_KEY
+        sync: false
+      - key: HF_TOKEN
+        sync: false
+      - key: POSTGRES_HOST
+        fromDatabase:
+          name: cancer-chatbot-db
+          property: host
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: cancer-chatbot-db
+          property: database
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: cancer-chatbot-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: cancer-chatbot-db
+          property: password
+      - key: POSTGRES_PORT
+        value: "5432"
+      - key: DATA_PATH
+        value: "data/CancerQA_data.csv"
+      - key: PYTHONUNBUFFERED
+        value: "1"

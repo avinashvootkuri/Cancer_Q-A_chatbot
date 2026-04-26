@@ -4,13 +4,16 @@ from psycopg2.extras import DictCursor
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 
-RUN_TIMEZONE_CHECK = os.getenv('RUN_TIMEZONE_CHECK', '1') == '1'
+RUN_TIMEZONE_CHECK = os.getenv('RUN_TIMEZONE_CHECK', '0') == '1'
+USE_DB = os.getenv('USE_DB', '0') == '1'
 
 TZ_INFO = os.getenv("TZ", "Europe/Berlin")
 tz = ZoneInfo(TZ_INFO)
 
 
 def get_db_connection():
+    if not USE_DB:
+        return None
     return psycopg2.connect(
         host=os.getenv("POSTGRES_HOST", "postgres"),
         database=os.getenv("POSTGRES_DB", "course_assistant"),
@@ -20,6 +23,9 @@ def get_db_connection():
 
 
 def init_db():
+    if not USE_DB:
+        print("Database disabled. Skipping initialization.")
+        return
     conn = get_db_connection()
     try:
         with conn.cursor() as cur:
@@ -59,6 +65,10 @@ def init_db():
 
 
 def save_conversation(conversation_id, question, answer_data, timestamp=None):
+    if not USE_DB:
+        print(f"Database disabled. Conversation {conversation_id} not saved.")
+        return
+    
     if timestamp is None:
         timestamp = datetime.now(tz)
 
@@ -97,6 +107,10 @@ def save_conversation(conversation_id, question, answer_data, timestamp=None):
 
 
 def save_feedback(conversation_id, feedback, timestamp=None):
+    if not USE_DB:
+        print(f"Database disabled. Feedback for {conversation_id} not saved.")
+        return
+    
     if timestamp is None:
         timestamp = datetime.now(tz)
 
@@ -113,6 +127,8 @@ def save_feedback(conversation_id, feedback, timestamp=None):
 
 
 def get_recent_conversations(limit=5, relevance=None):
+    if not USE_DB:
+        return []
     conn = get_db_connection()
     try:
         with conn.cursor(cursor_factory=DictCursor) as cur:
@@ -132,6 +148,8 @@ def get_recent_conversations(limit=5, relevance=None):
 
 
 def get_feedback_stats():
+    if not USE_DB:
+        return {'thumbs_up': 0, 'thumbs_down': 0}
     conn = get_db_connection()
     try:
         with conn.cursor(cursor_factory=DictCursor) as cur:
@@ -147,6 +165,8 @@ def get_feedback_stats():
 
 
 def check_timezone():
+    if not USE_DB:
+        return
     conn = get_db_connection()
     try:
         with conn.cursor() as cur:

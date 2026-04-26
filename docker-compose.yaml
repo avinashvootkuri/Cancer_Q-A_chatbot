@@ -16,6 +16,8 @@ services:
       dockerfile: Dockerfile
     environment:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_API_KEY_FALLBACK: ${GROQ_API_KEY_FALLBACK:-}
       DATA_PATH: "data/CancerQA_data.csv"
     ports:
       - "${APP_PORT:-5001}:5001"

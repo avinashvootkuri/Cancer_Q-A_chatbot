@@ -1,4 +1,9 @@
 .envrc
+.env
+mobile/android/build/
+mobile/android/app/build/
+mobile/.gradle-local/
+mobile/android/.gradle/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -83,6 +88,8 @@ target/
 # IPython
 profile_default/
 ipython_config.py
+
+.env
 
 # pyenv
 #   For a library or package, you might want to ignore these files since the code is
